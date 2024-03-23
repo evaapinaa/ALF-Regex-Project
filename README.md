@@ -6,7 +6,7 @@ La aplicación a realizar consiste fundamentalmente en un silabeador, es decir, 
 La nota de este proyecto fue de un 9.9
 
 
-## Authors
+## Autoría
 
 - [@evaapinaa](https://www.github.com/evaapinaa)
 
@@ -159,17 +159,15 @@ Dos consonantes contiguas rodeadas de vocales: V1 C1 C2 V2
 ```regex
 (?P<R2a>(?i)(?P<P1>(?P<Sil1>[aeiouáéíóúü])(?P<Sil2>[pgbcf][rl][aeiouáéíóúü])))
 
-(?P<R2b>(?i)(?P<P1>(?P<Sil1>(:?[aeiouáéíóúü]))(?P<Sil2>[dt][r][aeiouáéíóúü])))
+(?P<R2b>(?i)(?P<P1>(?P<Sil1>(:?[aeiouáéíóúü][dt]))(?P<Sil2>[r][aeiouáéíóúü])))
 
-(?P<R2c>(?i)(?P<P1>(?P<Sil11>[aeiouáéíóúü][pgbcf])(?P<Sil21>(:?[bcdfghjkmnñpqstvwxyz]|ch|ll|rr)[aeiouáéíóúü]))|
-(?P<P2>(?P<Sil12>[aeiouáéíóúü][dt])(?P<Sil22>(:?[bcdfghjklmnñpqstvwxyz]|ch|ll|rr)[aeiouáéíóúü]))
-(?P<P3>(?P<Sil13>[aeiouáéíóúü](:?[hjklmnñqrsvxyz]|ch|ll|rr))(?P<Sil23>(:?[bcdfghjklmnñpqrstvwxyz]|ch|ll|rr)[aeiouáéíóúü])))
+(?P<R2c>(?i)(?P<P1>(?P<Sil11>[aeiouáéíóúü][pgbcf])(?P<Sil21>(:?[bcdfghjkmnñpqstvwxyz]|ch|ll|rr)[aeiouáéíóúü]))|(?P<P2>(?P<Sil12>[aeiouáéíóúü][dt])(?P<Sil22>(:?[bcdfghjklmnñpqstvwxyz]|ch|ll|rr)[aeiouáéíóúü]))|(?P<P3>(?P<Sil13>[aeiouáéíóúü](:?[hjklmnñqrsvxyz]|ch|ll|rr))(?P<Sil23>(:?[bcdfghjklmnñpqrstvwxyz]|ch|ll|rr)[aeiouáéíóúü]))
 
 ```
 ### Regla 3
 Tres consonantes contiguas entre vocales: V1 C1 C2 C3 V2
 ```regex
-(?P<R3a>(?i)(?P<P1>(?P<Sil1>[aeiouáéíóúü][bcdfghjklmnñpqrstvwxyz])(?P<Sil2>(:?(:?ch|ll|rr|[pgbcf][rl][aeiouáéíóúü])|(:?[dt][r][aeiouáéíóúü])))))
+(?P<R3a>(?i)(?P<P1>(?P<Sil1>[aeiouáéíóúü][bcdfghjklmnñpqrstvwxyz])(?P<Sil2>([pgbcf]|[rl][aeiouáéíóúü])|([dt][r][aeiouáéíóúü]))))
 
 (?P<R3b>(?i)(?P<P1>(?P<Sil1>[aeiouáéíóúü][bdnmlr][s])(?P<Sil2>(:?ch|ll|rr|[bcdfghjklmnñpqrstvwxyz])[aeiouáéíóúü])))
 
@@ -179,8 +177,7 @@ Tres consonantes contiguas entre vocales: V1 C1 C2 C3 V2
 ### Regla 4
 Cuatro consonantes contiguas entre vocales: V1 C1 C2 C3 C4 V2
 ```regex
-(?P<R4>(?i)(?P<P1>(?P<Sil1>[aeiouáéíóúü](:?(:?[bdnmlr][s])|
-(:?[s][t])))(?P<Sil2>[pgbcf][rl][aeiouáéíóúü])))
+(?P<R4>(?i)(?P<P1>(?P<Sil1>[aeiouáéíóúü](:?(:?[bdnmlr][s])|(:?[s][t])))(?P<Sil2>[pgbcf][rl][aeiouáéíóúü])))
 
 ```
 ### Regla 5
@@ -197,24 +194,17 @@ en V2
 
 (?P<R5aiii>(?i)(?P<P1>(?P<Sil1>[iuü](:?h?[iuü]))))
 
-(?P<R5bi>(?i)(?P<P1>(?P<Sil11>[aeo])(?P<Sil21>h?[íú]))|
-(?P<P2>(?P<Sil12>[íú])(?P<Sil22>h?[aeo])))
+(?P<R5bi>(?i)(?P<P1>(?P<Sil11>[aeo])(?P<Sil21>h?[íú]))|(?P<P2>(?P<Sil12>[íú])(?P<Sil22>h?[aeo])))
 
-(?P<R5bii>(?i)(?P<P1>(?P<Sil11>[aá])(?P<Sil21>h?[aá]))|
-(?P<P2>(?P<Sil12>[eé])(?P<Sil22>h?[eé]))|
-(?P<P3>(?P<Sil13>[ií])(?P<Sil23>h?[ií]))|
-(?P<P4>(?P<Sil14>[oó])(?P<Sil24>h?[oó]))|
-(?P<P5>(?P<Sil15>[uú])(?P<Sil25>h?[uú])))
+(?P<R5bii>(?i)(?P<P1>(?P<Sil11>[aá])(?P<Sil21>h?[aá]))|(?P<P2>(?P<Sil12>[eé])(?P<Sil22>h?[eé]))|(?P<P3>(?P<Sil13>[ií])(?P<Sil23>h?[ií]))|(?P<P4>(?P<Sil14>[oó])(?P<Sil24>h?[oó]))|(?P<P5>(?P<Sil15>[uú])(?P<Sil25>h?[uú])))
 
-(?P<R5biii>(?i)(?P<P1>(?P<Sil11>[aá])(?P<Sil21>h?[eéoó]))|(?P<P2
->(?P<Sil12>[eé])(?P<Sil22>h?[oóaá]))|(?P<P3>(?P<Sil13>[oó])(?P<S
-il23>h?[aáeé])))
+(?P<R5biii>(?i)(?P<P1>(?P<Sil11>[aá])(?P<Sil21>h?[eéoó]))|(?P<P2>(?P<Sil12>[eé])(?P<Sil22>h?[oóaá]))|(?P<P3>(?P<Sil13>[oó])(?P<Sil23>h?[aáeé])))
 
 ```
 ### Regla 6
 Tres vocales consecutivas: V1 V2 V3
 ```regex
-(?P<R6>(?i)[iuü][aeoáéó][iuüy])
+(?P<R6>(?i)[iuü][aeoáéó][iuü])
 
 ```
 
@@ -306,8 +296,7 @@ tónica es la última sílaba (lo indicamos poniendo un guion al principio y mar
 de palabra con “$”)
 
 ```regex
-(?P<agudaT>(?i)[-](?P<silabaT>((\w*(?P<vocal1>[áéíóú])[ns]$)|(\w*(?P<vocal2>[áéíóú])\w+$)))
-
+(?P<agudaT>(?i)[-](?P<silabaT>((\w*(?P<vocal1>[áéíóú])[ns]$)|(\w*(?P<vocal2>[áéíóú])\w+$))))
 ```
 
 ### Agudas sin tilde
@@ -342,7 +331,7 @@ Fue sencilla de implementar. Lleva siempre tilde en la antepenúltima sílaba
 problemas.
 
 ```regex
-(?P<sobreesdrujula>(?i)(?P<silabaT>(\w*(?P<vocal>[áéíóú])\w*))([-]\w+){3,4}$)
+(?P<esdrujula>(?i)(?P<silabaT>(\w*(?P<vocal>[áéíóú])\w*))[-]\w*[-]\w+)
 
 ```
 ### Sobreesdrújulas
@@ -351,7 +340,7 @@ repetitiva, ponemos que «([-]\w+)» puede aparecer 3 o 4 veces. Así, contando 
 sílaba tónica, podemos llegar a identificar más de 3 sílabas. Quedando la tilde en la 
 cuarta, o quinta sílaba, que es lo que necesitamos buscar.
 ```regex
-(?P<agudaT>(?i)[-](?P<silabaT>((\w*(?P<vocal1>[áéíóú])[ns]$)|(\w*(?P<vocal2>[áéíóú])\w+$)))
+(?P<sobreesdrujula>(?i)(?P<silabaT>(\w*(?P<vocal>[áéíóú])\w*))([-]\w+){3,4}$)
 
 ```
 
