@@ -14,6 +14,17 @@ La nota de este proyecto fue de un 9.9
 ![Logo](https://www.um.es/documents/1073494/42130150/LogosimboloUMU-positivo.png/e1f004bd-ed22-23dd-682f-ab3f1f39b435?t=1693480807647&download=true)
 
 
+## Acknowledgements
+
+ - [Apéndice](https://github.com/evaapinaa/ALF-Regex-Project?tab=readme-ov-file#ap%C3%A9ndice)
+ - [Manual de usuario](https://github.com/evaapinaa/ALF-Regex-Project?tab=readme-ov-file#manual-de-usuario)
+ - [main.py](https://github.com/evaapinaa/ALF-Regex-Project?tab=readme-ov-file#main)
+ - [diccionario.py](https://github.com/evaapinaa/ALF-Regex-Project?tab=readme-ov-file#diccionario)
+ - [silabar.py](https://github.com/evaapinaa/ALF-Regex-Project?tab=readme-ov-file#silabear)
+ - [entonar.py](https://github.com/evaapinaa/ALF-Regex-Project?tab=readme-ov-file#entonaci%C3%B3n)
+ - [rimas.py](https://github.com/evaapinaa/ALF-Regex-Project?tab=readme-ov-file#rimas)
+ - [justificar.py](https://github.com/evaapinaa/ALF-Regex-Project?tab=readme-ov-file#justificar)
+
 ## Apéndice
 
 Para la realización de este proyecto, se ha optado por la creación de diversos módulos. Cada uno ha sido nombrado con su funcionalidad, facilitando así la legibilidad y organización del código. Los módulos son los siguientes: 
@@ -206,6 +217,46 @@ Tres vocales consecutivas: V1 V2 V3
 (?P<R6>(?i)[iuü][aeoáéó][iuüy])
 
 ```
+
+### Implementación.
+Para la implementación de este ejercicio ha sido esencial la función «cortar», la cual 
+devuelve una lista con los cortes a realizar sobre una palabra. Esta realiza una 
+búsqueda de coincidencias con las distintas expresiones regulares, calcula la posición 
+del corte, se posiciona en la última vocal de la coincidencia y realiza estos pasos hasta 
+que no existan más coincidencias. Todo ello se realiza guardando los cortes en una 
+lista que inicialmente estará vacía.
+La función «cortar» tiene esta forma:
+
+```python
+def cortar(cadena):
+    cortes = [0]
+    pos = 0
+    res = patron2Nucleos.search(cadena, pos)
+    while res:
+        if res.group('R1'):
+            corte = res.start() + 1
+            cortes.append(corte)
+            pos = res.end() - 1
+        elif res.group('R2a'):
+                …
+```
+
+Posteriormente se emplea la función «obtener_sílabas», la cual obtiene la lista de 
+cortes empleándolos como índices para separar la palabra y guardarla en una lista, 
+cuyos elementos serán unidos por guiones al haber finalizado los cortes, quedando el 
+resultado como un «string».
+La función «obtener_silabas» tiene esta forma:
+```python
+def obtener_silabas(palabra):
+    cortes = cortar(palabra)
+    silabas = []
+    for i in range(len(cortes) - 1):
+        silabas.append(palabra[cortes[i]:cortes[i + 1]])
+    silabas.append(palabra[cortes[-1]:])
+    palabra = '-'.join(silabas)
+    return palabra
+
+```
 ## Entonación
 Para la realización de este ejercicio, se han implementado diversas expresiones 
 regulares con el fin de identificar monosílabos, agudas, llanas y esdrújulas tanto con 
@@ -303,6 +354,33 @@ cuarta, o quinta sílaba, que es lo que necesitamos buscar.
 (?P<agudaT>(?i)[-](?P<silabaT>((\w*(?P<vocal1>[áéíóú])[ns]$)|(\w*(?P<vocal2>[áéíóú])\w+$)))
 
 ```
+
+### Implementación.
+La función principal de esta implementación es «entonacion». Esta recibe la palabra 
+separada por sílabas y realiza sobre ella la búsqueda de las expresiones regulares 
+definidas. Devuelve las sílabas con la acentuación en mayúscula, el tipo, la sílaba 
+tónica y la vocal tónica.
+Un pequeño extracto de esta función es:
+
+```python
+elif res.group('agudaST'):
+    tipo_palabra = 'aguda'
+    silaba_t = res.group('silabaT')
+    if res.group('vocal1'):
+        vocal_acentuada = res.group('vocal1')
+    elif res.group('vocal2'):
+        vocal_acentuada = res.group('vocal2')
+    elif res.group('vocal3'):
+        vocal_acentuada = res.group('vocal3')
+    elif res.group('vocal4'):
+        vocal_acentuada = res.group('vocal4'
+```
+
+Como hay diversas opciones para la vocal tónica, agregamos diversos condicionales.
+Adicionalmente, para reemplazar en la palabra la vocal tónica, y ponerla en mayúscula
+sin tildes, implementamos dos funciones auxiliares: una para reemplazar la vocal 
+tónica y otra para reemplazar en la palabra. Así dividimos en subproblemas, y se hace 
+más sencilla la implementación.
 
 ## Rimas
 Contamos con dos funciones para calcular las terminaciones de las rimas. Con la 
