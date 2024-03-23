@@ -14,7 +14,7 @@ La nota de este proyecto fue de un 9.9
 ![Logo](https://www.um.es/documents/1073494/42130150/LogosimboloUMU-positivo.png/e1f004bd-ed22-23dd-682f-ab3f1f39b435?t=1693480807647&download=true)
 
 
-## Acknowledgements
+## Links directos
 
  - [Apéndice](https://github.com/evaapinaa/ALF-Regex-Project?tab=readme-ov-file#ap%C3%A9ndice)
  - [Manual de usuario](https://github.com/evaapinaa/ALF-Regex-Project?tab=readme-ov-file#manual-de-usuario)
