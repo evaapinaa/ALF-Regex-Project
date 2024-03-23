@@ -208,7 +208,7 @@ Tres vocales consecutivas: V1 V2 V3
 
 ```
 
-### Implementación.
+### Implementación
 Para la implementación de este ejercicio ha sido esencial la función «cortar», la cual 
 devuelve una lista con los cortes a realizar sobre una palabra. Esta realiza una 
 búsqueda de coincidencias con las distintas expresiones regulares, calcula la posición 
@@ -344,7 +344,7 @@ cuarta, o quinta sílaba, que es lo que necesitamos buscar.
 
 ```
 
-### Implementación.
+### Implementación
 La función principal de esta implementación es «entonacion». Esta recibe la palabra 
 separada por sílabas y realiza sobre ella la búsqueda de las expresiones regulares 
 definidas. Devuelve las sílabas con la acentuación en mayúscula, el tipo, la sílaba 
