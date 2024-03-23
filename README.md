@@ -30,7 +30,7 @@ Para la realización de este proyecto, se ha optado por la creación de diversos
 Cada opción dada al usuario se asocia a un número que será el que tendrá que 
 introducir
 
-```bash
+```txt
 Menú de opciones:
 Opción 1 -> Silabear palabras
 Opción 2 -> Clasificar palabras
@@ -46,7 +46,7 @@ Introduzca una opción (solo el número):
 - Opción 3: Dadas tantas palabras como el usuario desee, introducidas de la misma forma que en las opciones anteriores, devuelve las palabras que se encuentren en el diccionario del programa, formado por las palabras que ingresa el usuario, que tengan rima consonante y rima asonante con cada una de las palabras introducidas
 - Opción 4: Se muestra el siguiente menú:
 
-```bash
+```txt
 Menú de opciones para justificar:
 Opción 1 -> A partir de un archivo (.txt) e imprimir por pantalla
 Opción 2 -> A partir de un archivo (.txt) y pasarlo a otro archivo (.txt)
@@ -82,7 +82,7 @@ inserción, una para el diccionario general y otra para los diccionarios de rima
 Tienen 
 este aspecto:
 
-```bash
+```python
 def insertar_diccionario_general(diccionario, palabra, silabas, entonacion, rimas_cons, 
 rimas_as):
     diccionario["Palabra"].append(palabra)
@@ -105,7 +105,7 @@ la cantidad de funciones que tratan los archivos CSV pero, al no haber encontrad
 alternativa que funcione, tomamos la decisión de dejarlo como está.
 
 Las funciones tienen este aspecto:
-```bash
+```python
 def archivo_a_diccionario_rimas_cons():
     if os.path.isfile('rimasconsonantes.csv'):
         dic = {}
@@ -138,14 +138,14 @@ def diccionario_a_archivo_rima_cons(diccionario):
 #### EXPRESIONES REGULARES DE LAS NORMAS DE DIVISIÓN SILÁBICA:
 ### Regla 1
 Una consonante entre dos vocales: V1 C V2
-```bash
+```python
 (?P<R1>(?i)(?P<P1>(?P<Sil1>(:?[aeiouáéíóúü]))(?P<Sil2>(:?ch|ll|rr|[bcdfgjklmnñpqrstvwxyz])(:?[aeiouáéíóúü]))))
 
 ```
 
 ### Regla 2
 Dos consonantes contiguas rodeadas de vocales: V1 C1 C2 V2
-```bash
+```python
 (?P<R2a>(?i)(?P<P1>(?P<Sil1>[aeiouáéíóúü])(?P<Sil2>[pgbcf][rl][aeiouáéíóúü])))
 
 (?P<R2b>(?i)(?P<P1>(?P<Sil1>(:?[aeiouáéíóúü]))(?P<Sil2>[dt][r][aeiouáéíóúü])))
@@ -157,7 +157,7 @@ Dos consonantes contiguas rodeadas de vocales: V1 C1 C2 V2
 ```
 ### Regla 3
 Tres consonantes contiguas entre vocales: V1 C1 C2 C3 V2
-```bash
+```python
 (?P<R3a>(?i)(?P<P1>(?P<Sil1>[aeiouáéíóúü][bcdfghjklmnñpqrstvwxyz])(?P<Sil2>(:?(:?ch|ll|rr|[pgbcf][rl][aeiouáéíóúü])|(:?[dt][r][aeiouáéíóúü])))))
 
 (?P<R3b>(?i)(?P<P1>(?P<Sil1>[aeiouáéíóúü][bdnmlr][s])(?P<Sil2>(:?ch|ll|rr|[bcdfghjklmnñpqrstvwxyz])[aeiouáéíóúü])))
@@ -167,7 +167,7 @@ Tres consonantes contiguas entre vocales: V1 C1 C2 C3 V2
 ```
 ### Regla 4
 Cuatro consonantes contiguas entre vocales: V1 C1 C2 C3 C4 V2
-```bash
+```python
 (?P<R4>(?i)(?P<P1>(?P<Sil1>[aeiouáéíóúü](:?(:?[bdnmlr][s])|
 (:?[s][t])))(?P<Sil2>[pgbcf][rl][aeiouáéíóúü])))
 
@@ -179,7 +179,7 @@ a) Cuando forman diptongo las vocales no se separan.
 
 b) Cuando forman hiato las dos vocales sí se separan por lo que la segunda sílaba comienza
 en V2
-```bash
+```python
 (?P<R5ai>(?i)(?P<P1>(?P<Sil1>[aeoáéó](:?h?[iu]))))
 
 (?P<R5aii>(?i)(?P<P1>(?P<Sil1>[iu](:?h?[aeoáéó]))))
@@ -202,7 +202,7 @@ il23>h?[aáeé])))
 ```
 ### Regla 6
 Tres vocales consecutivas: V1 V2 V3
-```bash
+```python
 (?P<R6>(?i)[iuü][aeoáéó][iuüy])
 
 ```
@@ -221,13 +221,13 @@ llevaba tilde, y que las palabras ya van separadas por sílabas con guiones entr
 Para determinar la vocal tónica dentro de una sílaba tónica con varias vocales 
 actuaremos así:
 - En los diptongos la vocal tónica es la abierta o la segunda cerrada. 
-```bash
+```python
 (\w*([iuü](?P<vocal2>[iuüaeo])\w*$)
 (\w*((?P<vocal3>[aeo])[iuü]\w*$)
 
 ```
 - En los triptongos la vocal tónica es la central.
-```bash
+```python
 (\w*[iuü](?P<vocal1>[aeo])[iuüy]\w*$)
 
 ```
@@ -236,7 +236,7 @@ actuaremos así:
 ### Monosílabos con tilde
 En los monosílabos, la silaba tónica es toda la palabra y esta es siempre aguda. Ya 
 tienen la tilde y no presentan guiones.
-```bash
+```python
 (?P<monoT>(?i)^[aeioubcdfghjklmnñpqrstvwxyz]*(?P<vocal>[áéíóú])[aeioubcdfghjklmnñpqrstvwxyz]*$)
 
 ```
@@ -245,7 +245,7 @@ Para facilitar la realización de la expresión, ponemos solo que no lleva guion
 tiene tilde, será aceptada por la expresión anterior) y añadimos el tratamiento de los 
 diptongos y triptongos.
 
-```bash
+```python
 (?P<monoST>(?i)(^[^\-]\w*[iuü](?P<vocal1>[aeo])[iuüy][bcdfghjkmñpqtvwxyz]?$)|(^[^\-]\w*([iuü](?P<vocal2>[iuüaeo])\w*$)|(^[^\-]\w*((?P<vocal3>[aeo])[iuü]\w*$)|(^[^\-]\w*(?P<vocal4>[aeiou])\w*$))))
 
 ```
@@ -254,7 +254,7 @@ Las palabras agudas llevan tilde cuando acaban en vocal, n o s, mientras que la 
 tónica es la última sílaba (lo indicamos poniendo un guion al principio y marcamos fin 
 de palabra con “$”)
 
-```bash
+```python
 (?P<agudaT>(?i)[-](?P<silabaT>((\w*(?P<vocal1>[áéíóú])[ns]$)|(\w*(?P<vocal2>[áéíóú])\w+$)))
 
 ```
@@ -264,7 +264,7 @@ Cuando no acaban en vocal, «n» o «s». Añadimos también la excepción de po
 ejemplo la palabra «robots» o «zigzags»: es aguda sin tilde cuando termina en «-s»
 precedida de otra consonante.
 
-```bash
+```python
 (?P<agudaST>(?i)[-](?P<silabaT>(\w*[iuü](?P<vocal1>[aeo])[iuüy][bcdfghjkmñpqtvwxyz]?$)|(\w*([iuü](?P<vocal2>[iuüaeo])[bcdfghjkmñpqtvwxyz]$))|(\w*((?P<vocal3>[aeo])[iuü][bcdfghjkmñpqtvwxyz]?$)|(\w*(?P<vocal4>[aeiou])([bcdfghjkmñpqtvwxyz][ns]$|[bcdfghjklmñpqrtvwxyz]$)))))
 
 ```
@@ -272,7 +272,7 @@ precedida de otra consonante.
 Llevan tilde cuando no terminan en «-n», en «-s» o en vocal. Teniendo la tilde y 
 sabiendo que siempre se va a encontrar en la penúltima sílaba, escribimos 
 sencillamente la expresión
-```bash
+```python
 (?P<llanaT>(?i)(?P<silabaT>\w*(((?P<vocal>[áéíóú])))\w*)[-]\w*(?![ns])$)
 
 ```
@@ -281,7 +281,7 @@ Esta fue la más complicada. Para que no se solapara con la otra regla de las ag
 pusimos que no llevara tildes e incluimos al final la excepción explicada en las agudas 
 sin tilde, con la expresión «Negative Lookbehind (?<!)».
 
-```bash
+```python
 (?P<llanaST>(?i)(?P<silabaT>((\w*[iuü](?P<vocal1>[aeo])[iuüy])|(\w*([iuü](?P<vocal2>[aeiouü])))|(\w*(?P<vocal3>[aeo])[iuü])|(\w*(?P<vocal4>[aeiou])))\w*)[-]\w*((?<![áéíóú])[aeiouns](?<![bcdfghjklmnñpqrtvwxyz]s)$))
 
 ```
@@ -290,7 +290,7 @@ Fue sencilla de implementar. Lleva siempre tilde en la antepenúltima sílaba
 (marcada con los guiones). La implementamos antes de las llanas para no tener 
 problemas.
 
-```bash
+```python
 (?P<sobreesdrujula>(?i)(?P<silabaT>(\w*(?P<vocal>[áéíóú])\w*))([-]\w+){3,4}$)
 
 ```
@@ -299,7 +299,7 @@ Lleva siempre tilde en la cuarta, o quinta sílaba. Para que no quedara muy larg
 repetitiva, ponemos que «([-]\w+)» puede aparecer 3 o 4 veces. Así, contando con la 
 sílaba tónica, podemos llegar a identificar más de 3 sílabas. Quedando la tilde en la 
 cuarta, o quinta sílaba, que es lo que necesitamos buscar.
-```bash
+```python
 (?P<agudaT>(?i)[-](?P<silabaT>((\w*(?P<vocal1>[áéíóú])[ns]$)|(\w*(?P<vocal2>[áéíóú])\w+$)))
 
 ```
@@ -314,7 +314,7 @@ de la palabra a partir de la vocal tónica.
 En ambos casos la implementación es casi idéntica. Solo cambia la manera de coger 
 la terminación, y para ello necesitamos saber el índice de la vocal tónica en la palabra.
 ### 1) Obtenemos las sílabas
-```bash
+```python
 silabas = silabar.obtener_silabas(palabra.strip())
 
 ```
@@ -324,24 +324,24 @@ también en mayúscula. Así, en casos como la palabra «melocotón», no nos
 molesta la tilde para asociarla como rima consonante a la palabra «son». En 
 este caso, el tipo no nos interesa, por lo que lo marcamos con «_», para no 
 usar variables innecesarias.
-```bash
+```python
 silabas_entonadas, _, silaba_t, vocal_t = entonar.entonacion(silabas)
 
 ```
 ### 3) Quitamos los guiones de la palabra entonada
-```bash
+```python
 palabra2 = silabas_entonadas.replace("-", "")
 
 ```
 
 ### 4) Para encontrar el índice de donde empieza la sílaba tónica podemos usar «find». Al igual con donde empieza la vocal tónica dentro de la sílaba tónica
-```bash
+```python
 indice_silaba_tonica = palabra2.find(silaba_t)
 indice_vocal_tonica_silaba = silaba_t.find(vocal_t)
 
 ```
 ### 5) La suma de ambos resulta en el índice de la vocal tónica en la palabra
-```bash
+```python
 indice_vocal_tonica = indice_silaba_tonica + indice_vocal_tonica_silaba
 
 ```
@@ -371,7 +371,7 @@ entre otras sílabas añade un guion y las deja para la siguiente línea, única
 deja para la siguiente línea o las añade a la línea actual.
 Un pequeño extracto representativo de esta función es:
 
-```bash
+```python
 elif lista_silabas[contador - 1] == ' ': # principio de una palabra
     texto_justificado.append(justificar_linea(linea_actual[:-1], ancho))
     linea_actual = silaba
