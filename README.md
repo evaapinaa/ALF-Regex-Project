@@ -453,8 +453,5 @@ tratamiento, se emplea la función «justificar línea», la cual devuelve una l
 se le han aplicado más espacios para que corresponda con el ancho deseado.
 
 Es apreciable que el resultado de este ejercicio no siempre es preciso y, en ocasiones, 
-el ancho resultante es mínimamente mayor que el deseado. Esto es debido a una 
-mala gestión de tiempo por parte del equipo, el cual ha hecho que no se pueda 
-trabajar más en mejorar esta parte del programa.
-
+el ancho resultante es mínimamente mayor que el deseado.
 
