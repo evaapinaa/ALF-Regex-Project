@@ -138,14 +138,14 @@ def diccionario_a_archivo_rima_cons(diccionario):
 #### EXPRESIONES REGULARES DE LAS NORMAS DE DIVISIÓN SILÁBICA:
 ### Regla 1
 Una consonante entre dos vocales: V1 C V2
-```python
+```regex
 (?P<R1>(?i)(?P<P1>(?P<Sil1>(:?[aeiouáéíóúü]))(?P<Sil2>(:?ch|ll|rr|[bcdfgjklmnñpqrstvwxyz])(:?[aeiouáéíóúü]))))
 
 ```
 
 ### Regla 2
 Dos consonantes contiguas rodeadas de vocales: V1 C1 C2 V2
-```python
+```regex
 (?P<R2a>(?i)(?P<P1>(?P<Sil1>[aeiouáéíóúü])(?P<Sil2>[pgbcf][rl][aeiouáéíóúü])))
 
 (?P<R2b>(?i)(?P<P1>(?P<Sil1>(:?[aeiouáéíóúü]))(?P<Sil2>[dt][r][aeiouáéíóúü])))
@@ -157,7 +157,7 @@ Dos consonantes contiguas rodeadas de vocales: V1 C1 C2 V2
 ```
 ### Regla 3
 Tres consonantes contiguas entre vocales: V1 C1 C2 C3 V2
-```python
+```regex
 (?P<R3a>(?i)(?P<P1>(?P<Sil1>[aeiouáéíóúü][bcdfghjklmnñpqrstvwxyz])(?P<Sil2>(:?(:?ch|ll|rr|[pgbcf][rl][aeiouáéíóúü])|(:?[dt][r][aeiouáéíóúü])))))
 
 (?P<R3b>(?i)(?P<P1>(?P<Sil1>[aeiouáéíóúü][bdnmlr][s])(?P<Sil2>(:?ch|ll|rr|[bcdfghjklmnñpqrstvwxyz])[aeiouáéíóúü])))
@@ -167,7 +167,7 @@ Tres consonantes contiguas entre vocales: V1 C1 C2 C3 V2
 ```
 ### Regla 4
 Cuatro consonantes contiguas entre vocales: V1 C1 C2 C3 C4 V2
-```python
+```regex
 (?P<R4>(?i)(?P<P1>(?P<Sil1>[aeiouáéíóúü](:?(:?[bdnmlr][s])|
 (:?[s][t])))(?P<Sil2>[pgbcf][rl][aeiouáéíóúü])))
 
@@ -179,7 +179,7 @@ a) Cuando forman diptongo las vocales no se separan.
 
 b) Cuando forman hiato las dos vocales sí se separan por lo que la segunda sílaba comienza
 en V2
-```python
+```regex
 (?P<R5ai>(?i)(?P<P1>(?P<Sil1>[aeoáéó](:?h?[iu]))))
 
 (?P<R5aii>(?i)(?P<P1>(?P<Sil1>[iu](:?h?[aeoáéó]))))
@@ -202,7 +202,7 @@ il23>h?[aáeé])))
 ```
 ### Regla 6
 Tres vocales consecutivas: V1 V2 V3
-```python
+```regex
 (?P<R6>(?i)[iuü][aeoáéó][iuüy])
 
 ```
@@ -221,13 +221,13 @@ llevaba tilde, y que las palabras ya van separadas por sílabas con guiones entr
 Para determinar la vocal tónica dentro de una sílaba tónica con varias vocales 
 actuaremos así:
 - En los diptongos la vocal tónica es la abierta o la segunda cerrada. 
-```python
+```regex
 (\w*([iuü](?P<vocal2>[iuüaeo])\w*$)
 (\w*((?P<vocal3>[aeo])[iuü]\w*$)
 
 ```
 - En los triptongos la vocal tónica es la central.
-```python
+```regex
 (\w*[iuü](?P<vocal1>[aeo])[iuüy]\w*$)
 
 ```
@@ -236,7 +236,7 @@ actuaremos así:
 ### Monosílabos con tilde
 En los monosílabos, la silaba tónica es toda la palabra y esta es siempre aguda. Ya 
 tienen la tilde y no presentan guiones.
-```python
+```regex
 (?P<monoT>(?i)^[aeioubcdfghjklmnñpqrstvwxyz]*(?P<vocal>[áéíóú])[aeioubcdfghjklmnñpqrstvwxyz]*$)
 
 ```
@@ -245,7 +245,7 @@ Para facilitar la realización de la expresión, ponemos solo que no lleva guion
 tiene tilde, será aceptada por la expresión anterior) y añadimos el tratamiento de los 
 diptongos y triptongos.
 
-```python
+```regex
 (?P<monoST>(?i)(^[^\-]\w*[iuü](?P<vocal1>[aeo])[iuüy][bcdfghjkmñpqtvwxyz]?$)|(^[^\-]\w*([iuü](?P<vocal2>[iuüaeo])\w*$)|(^[^\-]\w*((?P<vocal3>[aeo])[iuü]\w*$)|(^[^\-]\w*(?P<vocal4>[aeiou])\w*$))))
 
 ```
@@ -254,7 +254,7 @@ Las palabras agudas llevan tilde cuando acaban en vocal, n o s, mientras que la 
 tónica es la última sílaba (lo indicamos poniendo un guion al principio y marcamos fin 
 de palabra con “$”)
 
-```python
+```regex
 (?P<agudaT>(?i)[-](?P<silabaT>((\w*(?P<vocal1>[áéíóú])[ns]$)|(\w*(?P<vocal2>[áéíóú])\w+$)))
 
 ```
@@ -264,7 +264,7 @@ Cuando no acaban en vocal, «n» o «s». Añadimos también la excepción de po
 ejemplo la palabra «robots» o «zigzags»: es aguda sin tilde cuando termina en «-s»
 precedida de otra consonante.
 
-```python
+```regex
 (?P<agudaST>(?i)[-](?P<silabaT>(\w*[iuü](?P<vocal1>[aeo])[iuüy][bcdfghjkmñpqtvwxyz]?$)|(\w*([iuü](?P<vocal2>[iuüaeo])[bcdfghjkmñpqtvwxyz]$))|(\w*((?P<vocal3>[aeo])[iuü][bcdfghjkmñpqtvwxyz]?$)|(\w*(?P<vocal4>[aeiou])([bcdfghjkmñpqtvwxyz][ns]$|[bcdfghjklmñpqrtvwxyz]$)))))
 
 ```
@@ -272,7 +272,7 @@ precedida de otra consonante.
 Llevan tilde cuando no terminan en «-n», en «-s» o en vocal. Teniendo la tilde y 
 sabiendo que siempre se va a encontrar en la penúltima sílaba, escribimos 
 sencillamente la expresión
-```python
+```regex
 (?P<llanaT>(?i)(?P<silabaT>\w*(((?P<vocal>[áéíóú])))\w*)[-]\w*(?![ns])$)
 
 ```
@@ -281,7 +281,7 @@ Esta fue la más complicada. Para que no se solapara con la otra regla de las ag
 pusimos que no llevara tildes e incluimos al final la excepción explicada en las agudas 
 sin tilde, con la expresión «Negative Lookbehind (?<!)».
 
-```python
+```regex
 (?P<llanaST>(?i)(?P<silabaT>((\w*[iuü](?P<vocal1>[aeo])[iuüy])|(\w*([iuü](?P<vocal2>[aeiouü])))|(\w*(?P<vocal3>[aeo])[iuü])|(\w*(?P<vocal4>[aeiou])))\w*)[-]\w*((?<![áéíóú])[aeiouns](?<![bcdfghjklmnñpqrtvwxyz]s)$))
 
 ```
@@ -290,7 +290,7 @@ Fue sencilla de implementar. Lleva siempre tilde en la antepenúltima sílaba
 (marcada con los guiones). La implementamos antes de las llanas para no tener 
 problemas.
 
-```python
+```regex
 (?P<sobreesdrujula>(?i)(?P<silabaT>(\w*(?P<vocal>[áéíóú])\w*))([-]\w+){3,4}$)
 
 ```
@@ -299,7 +299,7 @@ Lleva siempre tilde en la cuarta, o quinta sílaba. Para que no quedara muy larg
 repetitiva, ponemos que «([-]\w+)» puede aparecer 3 o 4 veces. Así, contando con la 
 sílaba tónica, podemos llegar a identificar más de 3 sílabas. Quedando la tilde en la 
 cuarta, o quinta sílaba, que es lo que necesitamos buscar.
-```python
+```regex
 (?P<agudaT>(?i)[-](?P<silabaT>((\w*(?P<vocal1>[áéíóú])[ns]$)|(\w*(?P<vocal2>[áéíóú])\w+$)))
 
 ```
