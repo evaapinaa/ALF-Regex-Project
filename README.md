@@ -9,7 +9,7 @@ La nota de este proyecto fue de un 9.9
 ## Autoría
 
 - [@evaapinaa](https://www.github.com/evaapinaa)
-- [@xmariamercx](https://github.com/xmariamercx))
+- [@xmariamercx](https://github.com/xmariamercx)
 
 
 ![Logo](https://www.um.es/documents/1073494/42130150/LogosimboloUMU-positivo.png/e1f004bd-ed22-23dd-682f-ab3f1f39b435?t=1693480807647&download=true)
