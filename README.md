@@ -385,9 +385,9 @@ la terminación, y para ello necesitamos saber el índice de la vocal tónica en
 silabas = silabar.obtener_silabas(palabra.strip())
 
 ```
-### 2) Con la función «entonacion» obtenemos las silabas con la entonación 
-marcada, la silaba tónica también con la entonación marcada y la vocal tónica, 
-también en mayúscula. Así, en casos como la palabra «melocotón», no nos 
+### 2) Con la función «entonacion» obtenemos las silabas con la entonación marcada, la silaba tónica también con la entonación marcada y la vocal tónica, también en mayúscula. 
+
+Así, en casos como la palabra «melocotón», no nos 
 molesta la tilde para asociarla como rima consonante a la palabra «son». En 
 este caso, el tipo no nos interesa, por lo que lo marcamos con «_», para no 
 usar variables innecesarias.
